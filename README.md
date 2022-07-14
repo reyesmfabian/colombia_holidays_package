@@ -11,12 +11,12 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
-###
+##
 Flutter package to get to know Colombia's holidays.
 
 ## Features
 
-[x] Get the holidays of a year.
+[x] Get the holidays of a year.  
 [x] Check if a date is a holiday.
 
 ## Usage
