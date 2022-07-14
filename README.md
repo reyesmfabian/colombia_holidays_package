@@ -11,8 +11,7 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
-##
-Flutter package to get to know Colombia's holidays.
+# Flutter package to get to know Colombia's holidays.
 
 ## Features
 
