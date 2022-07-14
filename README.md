@@ -22,7 +22,6 @@ TODO: Flutter package to get to know Colombia's holidays.
 
 Create an instance of ColombiaHolidays and call the methods you need.
 
-```dart
 
 ```dart
 void main() async {
