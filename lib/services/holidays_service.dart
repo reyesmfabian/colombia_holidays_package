@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:colombia_holidays/models/holidays_response_model.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 class ColombiaHolidays {
@@ -9,10 +10,8 @@ class ColombiaHolidays {
   Future<List<Holiday>> getHolidays({required int year}) async {
     year < 1900 ? throw ArgumentError('Year must be greater than 1900') : null;
     final response = await rootBundle.loadString(path);
-    final json = jsonDecode(response);
-    final yearsResponse = YearsModel.fromJson(json);
-    final result =
-        yearsResponse.years.firstWhere((finYear) => finYear.year == year);
+    final yearsResult = await compute(_getyears, response);
+    final result = yearsResult.firstWhere((finYear) => finYear.year == year);
     return result.holidays;
   }
 
@@ -30,9 +29,8 @@ class ColombiaHolidays {
     String finalMoth = month < 10 ? '0$month' : '$month';
     final date = '$day/$finalMoth/$year';
     final response = await rootBundle.loadString(path);
-    final json = await jsonDecode(response);
-    final yearsResponse = YearsModel.fromJson(json);
-    for (var year in yearsResponse.years) {
+    final yearsResult = await compute(_getyears, response);
+    for (var year in yearsResult) {
       for (var holiday in year.holidays) {
         if (holiday.date == date) {
           isHoliday = true;
@@ -40,5 +38,11 @@ class ColombiaHolidays {
       }
     }
     return isHoliday;
+  }
+
+  List<Year> _getyears(String response) {
+    final json = jsonDecode(response);
+    final yearsResponse = YearsModel.fromJson(json);
+    return yearsResponse.years;
   }
 }
