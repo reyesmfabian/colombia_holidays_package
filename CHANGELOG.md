@@ -2,5 +2,7 @@
 #### [1.0.1] - Add Documentation
 #### [1.0.2] - Minor Fix
 #### [1.0.3] - Add Tests
+#### [1.0.4] - Fix Holidays
+
 
 
