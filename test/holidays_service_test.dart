@@ -9,7 +9,7 @@ void main() {
 
     test('getHolidays', () async {
       ColombiaHolidays holidays = ColombiaHolidays();
-      final holidaysByYear = await holidays.getHolidays(year: 2022);
+      final holidaysByYear = await holidays.getHolidays(year: 2020);
 
       for (var holiday in holidaysByYear) {
         expect(holiday.date, isNotNull);

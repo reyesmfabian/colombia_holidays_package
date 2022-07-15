@@ -15,7 +15,9 @@ class ColombiaHolidays {
   /// * [year]: The year for which you want to get the holidays....
   ///
   Future<List<Holiday>> getHolidays({required int year}) async {
-    year < 1900 ? throw ArgumentError('Year must be greater than 1900') : null;
+    if (year < 1900 || year > 2299) {
+      throw ArgumentError('Year must be between 1900 and 2299');
+    }
     final response = await rootBundle.loadString(path);
     final yearsResult = await compute(_getyears, response);
     final result = yearsResult.firstWhere((finYear) => finYear.year == year);
