@@ -9,10 +9,10 @@ class ColombiaHolidays {
 
   ///
 
-  /// **Esta función devuelve una lista de días festivos para un año determinado**
+  /// **This function returns a list of holidays for a given year**.
   ///
   /// Args:
-  ///   * [year]: El año para el que desea obtener los festivos..
+  /// * [year]: The year for which you want to get the holidays....
   ///
   Future<List<Holiday>> getHolidays({required int year}) async {
     year < 1900 ? throw ArgumentError('Year must be greater than 1900') : null;
@@ -22,19 +22,19 @@ class ColombiaHolidays {
     return result.holidays;
   }
 
-  /// **Comprueba si la fecha dada es un día festivo.**
+  /// **Checks if the given date is a holiday.
   ///
   /// Args:
-  ///   * [day]: Día del mes.
-  ///   * [month]: Mes del año.
-  ///   * [year]: Mes del año.
+  /// * [day]: Day of the month.
+  /// * [month]: Month of the year.
+  /// * [year]: year.
   ///
 
   Future<bool> isHoliday(
       {required int day, required int month, required int year}) async {
-    month < 0 || month > 12
-        ? throw ArgumentError('Month must be between 0 and 12')
-        : null;
+    if (month < 0 || month > 12) {
+      throw ArgumentError('Month must be between 0 and 12');
+    }
     if (day < 0 || day > 31) {
       throw ArgumentError('Day must be between 1 and 31');
     }
@@ -56,6 +56,9 @@ class ColombiaHolidays {
     }
     return isHoliday;
   }
+
+  /// **Convert the years to Json for manipulation**.
+  ///
 
   List<Year> _getyears(String response) {
     final json = jsonDecode(response);

@@ -5,6 +5,9 @@ YearsModel yearsModelFromJson(String str) =>
 
 String yearsModelToJson(YearsModel data) => json.encode(data.toJson());
 
+/// *Year Model response*.
+///
+///
 class YearsModel {
   YearsModel({
     required this.years,
@@ -21,6 +24,9 @@ class YearsModel {
       };
 }
 
+/// *Year Model*.
+///
+///
 class Year {
   Year({
     required this.year,
@@ -42,6 +48,9 @@ class Year {
       };
 }
 
+/// *Holiday Model*.
+///
+///
 class Holiday {
   Holiday({
     required this.date,

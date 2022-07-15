@@ -1,14 +1,28 @@
 import 'package:colombia_holidays/colombia_holidays.dart';
 
 void main() async {
+  /// Create an instance
+  ///
   ColombiaHolidays holidays = ColombiaHolidays();
 
-// Get all holidays by Year
-  final holidaysByYear = await holidays.getHolidays(year: 2020);
-  // Result is a List of Holidays
-  print(holidaysByYear);
+  /// **This function returns a list of holidays for a given year**.
+  ///
+  /// Args:
+  /// * [year]: The year for which you want to get the holidays....
+  ///
 
-// Check if a date is a holiday
+  final holidaysByYear = await holidays.getHolidays(year: 2020);
+  for (var holiday in holidaysByYear) {
+    print(holiday.date);
+  }
+  // Result is a List of Holidays
+  /// **Checks if the given date is a holiday.
+  ///
+  /// Args:
+  /// * [day]: Day of the month.
+  /// * [month]: Month of the year.
+  /// * [year]: year.
+  ///
   final isHoliday = await holidays.isHoliday(day: 20, month: 12, year: 2022);
   // Result is a bool
   print(isHoliday);

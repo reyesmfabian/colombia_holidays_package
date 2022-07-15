@@ -15,7 +15,7 @@ and the Flutter guide for
 
 ## Features
 
-[x] Get the holidays of a year.  
+[x] Get the Holidays of a year.  
 [x] Check if a date is a holiday.
 
 ## Usage
