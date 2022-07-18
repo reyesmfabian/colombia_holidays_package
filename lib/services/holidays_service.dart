@@ -24,9 +24,10 @@ class ColombiaHolidays {
     /// read the json file and convert it to a list of holidays.
     final response = await rootBundle.loadString(path);
 
+    /// Get the list of holidays
     final yearsResult = await compute(_getyears, response);
 
-    /// Get the holidays for the given year.
+    /// Find the holidays for the given year.
     final result = yearsResult.firstWhere((finYear) => finYear.year == year);
 
     /// Return the holidays for the given year.
@@ -40,7 +41,6 @@ class ColombiaHolidays {
   /// * [month]: Month of the year.
   /// * [year]: year.
   ///
-
   Future<bool> isHoliday(
       {required int day, required int month, required int year}) async {
     /// Validate the month parameter, must be greater than 0 and less than 13.
@@ -87,8 +87,6 @@ class ColombiaHolidays {
   }
 
   /// **Convert the years to Json for manipulation**.
-  ///
-
   List<Year> _getyears(String response) {
     /// Convert the json to a list of years.
     final json = jsonDecode(response);

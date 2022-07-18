@@ -5,3 +5,5 @@
 #### [1.0.4] - Fix Holidays
 #### [2.0.0] - Production Release
 #### [2.0.1] - Add Documentation
+#### [2.0.2] - Add Documentation
+
