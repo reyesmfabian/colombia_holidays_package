@@ -1,4 +1,4 @@
-#### [2.1.4] - Update dependencies
+#### [2.1.5] - Update dependencies
 
 #### [2.0.2] - Add Documentation
 
