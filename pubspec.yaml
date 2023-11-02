@@ -1,6 +1,6 @@
 name: colombia_holidays
 description: Flutter package to know the holidays in Colombia, you can get all the holidays per year or determine if a date is a holiday.
-version: 2.1.1
+version: 2.1.2
 homepage: https://smart-dev.com.co
 repository: https://github.com/reyesmfabian/colombia_holidays_package
 

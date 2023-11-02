@@ -1,4 +1,5 @@
 import 'package:colombia_holidays/colombia_holidays.dart';
+import 'package:flutter/foundation.dart';
 
 void main() async {
   /// Create an instance
@@ -13,7 +14,9 @@ void main() async {
 
   final holidaysByYear = await holidays.getHolidays(year: 2020);
   for (var holiday in holidaysByYear) {
-    print(holiday.date);
+    if (kDebugMode) {
+      print(holiday.date);
+    }
   }
   // Result is a List of Holidays
   /// **Checks if the given date is a holiday.
@@ -24,6 +27,8 @@ void main() async {
   /// * [year]: year.
   ///
   final isHoliday = await holidays.isHoliday(day: 20, month: 12, year: 2022);
-  // Result is a bool
-  print(isHoliday);
+
+  if (kDebugMode) {
+    print(isHoliday);
+  }
 }
