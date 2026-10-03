@@ -21,17 +21,16 @@ class ColombiaHolidays {
       throw ArgumentError('Year must be between 1900 and 2299');
     }
 
-    /// read the json file and convert it to a list of holidays.
-    final response = await rootBundle.loadString(path);
-
     /// Get the list of holidays
-    final yearsResult = await compute(_getyears, response);
+    final yearsResult = await _loadYears();
 
     /// Find the holidays for the given year.
     final result = yearsResult.firstWhere((finYear) => finYear.year == year);
 
-    /// Return the holidays for the given year.
-    return result.holidays;
+    /// Return a copy of the holidays for the given year, so the cache can't be modified.
+    return result.holidays
+        .map((holiday) => Holiday.fromJson(holiday.toJson()))
+        .toList();
   }
 
   /// **Checks if the given date is a holiday.
@@ -44,12 +43,12 @@ class ColombiaHolidays {
   Future<bool> isHoliday(
       {required int day, required int month, required int year}) async {
     /// Validate the month parameter, must be greater than 0 and less than 13.
-    if (month < 0 || month > 12) {
-      throw ArgumentError('Month must be between 0 and 12');
+    if (month < 1 || month > 12) {
+      throw ArgumentError('Month must be between 1 and 12');
     }
 
     /// Validate the day parameter, must be greater than 0 and less than 32.
-    if (day < 0 || day > 31) {
+    if (day < 1 || day > 31) {
       throw ArgumentError('Day must be between 1 and 31');
     }
 
@@ -58,36 +57,33 @@ class ColombiaHolidays {
       throw ArgumentError('Year must be between 1900 and 2299');
     }
 
-    /// read the json file and convert it to a list of holidays.
-    bool isHoliday = false;
+    /// Create the date string with the same dd/MM/yyyy format of the json file.
+    final date = '${day.toString().padLeft(2, '0')}/'
+        '${month.toString().padLeft(2, '0')}/$year';
 
-    /// Parse two digits month
-    String finalMoth = month < 10 ? '0$month' : '$month';
-
-    /// Create the date string.
-    final date = '$day/$finalMoth/$year';
-
-    /// Read the json file and convert it to a list of holidays.
-    final response = await rootBundle.loadString(path);
-
-    /// Get the holidays.
-    final yearsResult = await compute(_getyears, response);
-
-    /// Check if the given date is a holiday.
-    for (var year in yearsResult) {
-      for (var holiday in year.holidays) {
-        if (holiday.date == date) {
-          isHoliday = true;
-        }
-      }
-    }
+    /// Get the holidays of the given year.
+    final holidays = await getHolidays(year: year);
 
     /// Return if the day is a holiday.
-    return isHoliday;
+    return holidays.any((holiday) => holiday.date == date);
+  }
+
+  /// Parsed years, loaded only once.
+  static Future<List<Year>>? _years;
+
+  /// **Read the json file and convert it to a list of years**.
+  Future<List<Year>> _loadYears() {
+    return _years ??= rootBundle
+        .loadString(path)
+        .then((response) => compute(_getyears, response))
+        .catchError((Object error, StackTrace stackTrace) {
+      _years = null;
+      Error.throwWithStackTrace(error, stackTrace);
+    });
   }
 
   /// **Convert the years to Json for manipulation**.
-  List<Year> _getyears(String response) {
+  static List<Year> _getyears(String response) {
     /// Convert the json to a list of years.
     final json = jsonDecode(response);
 

@@ -1,5 +1,4 @@
-library colombia_holidays;
+library;
 
-export 'colombia_holidays.dart';
 export 'models/models.dart';
 export 'services/services.dart';
